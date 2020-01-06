@@ -1,0 +1,44 @@
+<form #courseAdmissionForm="ngForm" (ngSubmit)="submit(courseAdmissionForm)">
+  <div class="form-group">
+    <div>
+      Course Name
+    </div>
+    <label for="Course-Name">
+      <input required ngModel name='courseName' maxlength="20" #courseName='ngModel'
+        (change)='handleInputChange(courseName)'>
+    </label>
+    <div>
+      <div class="alert alert-danger" *ngIf='!courseName.valid && courseName.touched'>
+        Course name required
+      </div>
+      <label for="contactMethod">
+      </label>
+      <div>
+        Category
+      </div>
+      <select required ngModel name="category" #category='ngModel' id="category" class="form-control">
+        <option value=""></option>
+        <option *ngFor='let contentTypes of contentType' [value]='contentTypes.id'>
+          {{contentTypes.name}}
+        </option>
+      </select>
+      <div class="alert alert-danger" *ngIf='category.invalid && category.touched'>
+        Please Select A Category!
+      </div>
+    </div>
+
+
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" ngModel name='cashbackCheck'> 30-day money-back guarantee
+      </label>
+    </div>
+
+    <button class='btn btn-primary' [disabled]='courseAdmissionForm.invalid'>
+      Create
+    </button>
+  </div>
+</form>
+<p>
+  {{courseAdmissionForm.value | json}}
+</p>
